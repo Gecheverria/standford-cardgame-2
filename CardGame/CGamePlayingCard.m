@@ -17,14 +17,22 @@
     //Por el momento comparamos una carta
     if ([otherCards count] == 1) {
         
-        //Si se encuentra una carta en nuestro arreglo de otherCards, creamos una nueva carta de juego asignandole esta carta con el argumento "firstObject"que es como [array objectAtIndex:0], solo que no va a parar si el arreglo esta vacio
-        CGamePlayingCard *otherCard = [otherCards firstObject];
+        //Si se encuentra una carta en nuestro arreglo de otherCards, creamos una nueva carta de juego asignandole esta carta con el argumento "firstObject"que es como [array objectAtIndex:0], solo que no va a parar si el arreglo esta vacio. El problema de esto es que firsObject retorna un tipo id, por lo que si de alguna manera se retorna algo queno sea una carta, se trabaria el programa.
         
-        //Luego comparamos otherCard con la tarjeta en "self"
-        if (otherCard.rank == self.rank) {
-            score = 4;
-        } else if ([otherCard.suit isEqualToString:self.suit]) {
-            score = 1;
+        //Usaremos introspection con un condicional para chequear si el objeto es un PlayingCard usando isKindOfClass (heredado de NSObject)
+        id card = [otherCards firstObject];
+        
+        if ([card isKindOfClass:[CGamePlayingCard class]]) {
+            
+            //Si es de tipo CGamePlayingCard, hacemos type casting al id card
+            CGamePlayingCard *otherCard = (CGamePlayingCard *)card;
+            
+            //Luego comparamos otherCard con la tarjeta en "self"
+            if (otherCard.rank == self.rank) {
+                score = 4;
+            } else if ([otherCard.suit isEqualToString:self.suit]) {
+                score = 1;
+            }
         }
     }
     
