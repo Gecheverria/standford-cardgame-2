@@ -10,4 +10,10 @@
 
 @interface CGamePlayingCard : CGameCard
 
+@property (strong, nonatomic) NSString *suit;
+@property (nonatomic) NSUInteger rank;
+
++ (NSArray *)validSuits;
++ (NSUInteger)maxRanks;
+
 @end

@@ -10,4 +10,66 @@
 
 @implementation CGamePlayingCard
 
+//Para nuestro Matching game, hay que sobreescribir el metodo de CGameCard para comparar correctamente nuestras cartas
+- (int)match:(NSArray *)otherCards {
+    int score = 0;
+    
+    //Por el momento comparamos una carta
+    if ([otherCards count] == 1) {
+        
+        //Si se encuentra una carta en nuestro arreglo de otherCards, creamos una nueva carta de juego asignandole esta carta con el argumento "firstObject"que es como [array objectAtIndex:0], solo que no va a parar si el arreglo esta vacio
+        CGamePlayingCard *otherCard = [otherCards firstObject];
+        
+        //Luego comparamos otherCard con la tarjeta en "self"
+        if (otherCard.rank == self.rank) {
+            score = 4;
+        } else if ([otherCard.suit isEqualToString:self.suit]) {
+            score = 1;
+        }
+    }
+    
+    return score;
+}
+
+//Sobreescribimos la propiedad contents de CGameCard
+-(NSString *) contents {
+    
+    NSArray *rankStrings = [CGamePlayingCard rankStrings];
+    //los self.ranky self.suit vienen de sus getters, que son llenados en el playingcarddeck.
+    return [rankStrings[self.rank] stringByAppendingString:self.suit];
+    
+}
+
+//A continuacion 3 metodos de clase, que son principalmente de utilidad para definir valores
++ (NSArray *)validSuits {
+    return @[@"♠︎",@"♣︎",@"♥︎",@"♦︎"];
+}
+
++ (NSArray *)rankStrings {
+    return @[@"?",@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"J",@"Q",@"K"];
+}
+
++ (NSUInteger)maxRanks {
+    return [[self rankStrings] count] - 1;
+}
+
+//Debemos sintetizar suit porque sobreescribimos su getter y setter
+@synthesize suit = _suit;
+
+- (void)setSuit:(NSString *)suit {
+    if ([[CGamePlayingCard validSuits] containsObject:suit]) {
+        _suit = suit;
+    }
+}
+
+- (NSString *) setSuit {
+    return _suit ? _suit :@"?";
+}
+
+- (void)setRank:(NSUInteger)rank {
+    if (rank <= [CGamePlayingCard maxRanks]) {
+        _rank = rank;
+    }
+}
+
 @end

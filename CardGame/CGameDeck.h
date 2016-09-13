@@ -7,7 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "CGameCard.h"
 
 @interface CGameDeck : NSObject
+
+- (void)addCard:(CGameCard *)card atTop:(BOOL)atTop;
+- (void)addCard:(CGameCard *)card;
+
+- (CGameCard *)drawRandomCard;
+
 
 @end
