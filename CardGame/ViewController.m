@@ -17,6 +17,7 @@
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentSwitchGameType;
+@property (weak, nonatomic) IBOutlet UILabel *gameStatus;
 
 @end
 
@@ -87,6 +88,8 @@
         
         //Actualizamos la puntuacion
         self.scoreLabel.text = [NSString stringWithFormat:@"Score: %ld", (long)self.game.score];
+        
+        self.gameStatus.text = [NSString stringWithFormat:@"%@", self.game.status];
         
     }
     

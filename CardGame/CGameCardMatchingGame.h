@@ -19,5 +19,6 @@
 - (CGameCard *)cardAtIndex:(NSUInteger)index;
 
 @property (nonatomic, readonly) NSInteger score;
+@property (nonatomic, readonly) NSString *status;
 
 @end

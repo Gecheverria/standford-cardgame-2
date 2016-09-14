@@ -9,8 +9,11 @@
 #import "CGameCardMatchingGame.h"
 
 @interface CGameCardMatchingGame()
+
 @property (nonatomic, readwrite) NSInteger score;
+@property (nonatomic, readwrite) NSString *status;
 @property (strong, nonatomic) NSMutableArray *cards; //De objeto CGameCard
+
 @end
 
 @implementation CGameCardMatchingGame
@@ -25,6 +28,10 @@
     self = [super init]; //Initializer designado de nuestro super
     
     if (self) {
+        
+        //Para que no
+        self.status = @"";
+        
         for (int i = 0; i < count; i++) {
             //Obtenemos una carta al azar
             CGameCard *card = [deck drawRandomCard];
@@ -64,7 +71,7 @@ static const int COST_TO_CHOOSE = 1;
         if (card.isChosen) {
             card.chosen = NO; //Si esta seleccionada, la de-seleccionamos
         } else {
-            
+            self.status = [NSString stringWithFormat:@"%@", card.contents];
             //Si no lo esta, procedemos a hacer la comparacion en el arreglo de todas las cartas para ver cuales estan sin pareja y seleccionadas
             for (CGameCard *otherCard in self.cards) {
                 
@@ -76,14 +83,19 @@ static const int COST_TO_CHOOSE = 1;
                     
                     //Si existe un match en el metodo de "match" de CGameCard, nos regresaria un valor, por lo que comparamos el resultado
                     if (matchScore) {
-                        self.score += matchScore * MATCH_BONUS;
+                        int bonus = matchScore * MATCH_BONUS;
+                        self.score += bonus;
                         
                         //Ya que son pareja, dejamos seleccionadas las cartas
                         card.matched = YES;
                         otherCard.matched = YES;
                         
+                        self.status = [NSString stringWithFormat:@"Matched %@ %@ for %ld points!", card.contents, otherCard.contents, (long)bonus];
+                        
                     } else {
                         self.score -= MISS_PENALTY;
+                        
+                        self.status = [NSString stringWithFormat:@"%@ %@ don't match! %ld score penalty!", card.contents, otherCard.contents, (long)MISS_PENALTY];
                         
                         //Si no parejan, la deseleccionamos (cuando sean 3 o mas no seria necesario desseleccionarla)
                         otherCard.chosen = NO;

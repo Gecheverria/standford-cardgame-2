@@ -435,13 +435,13 @@
                                     <rect key="frame" x="267" y="472" width="113" height="21"/>
                                 </variation>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game Status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="53T-C7-afa">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="53T-C7-afa">
                                 <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="20" y="472" width="234" height="21"/>
+                                    <rect key="frame" x="20" y="472" width="234" height="79"/>
                                 </variation>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EzE-58-BBn">
@@ -538,6 +538,7 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="gameStatus" destination="53T-C7-afa" id="Fdy-tt-s5I"/>
                         <outlet property="scoreLabel" destination="GAF-gk-h4t" id="ba6-KL-3mq"/>
                         <outlet property="segmentSwitchGameType" destination="i9o-uk-ftH" id="R0s-hb-Frm"/>
                         <outletCollection property="cardButtons" destination="lIO-hY-mKL" id="Hnl-rL-RSv"/>
