@@ -16,6 +16,7 @@
 @property (strong, nonatomic) CGameCardMatchingGame *game;//Modelo de juego
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *segmentSwitchGameType;
 
 @end
 
@@ -33,7 +34,28 @@
 }
 
 
+- (IBAction)generateNewDeckButton:(UIButton *)sender {
+    
+    //creamos un nuevo deck
+    self.game = [[CGameCardMatchingGame alloc] initWithCardCount:[self.cardButtons count] usingDeck:[self createDeck]];
+    
+    //Habilitamos el segmented control
+    self.segmentSwitchGameType.userInteractionEnabled = YES;
+    self.segmentSwitchGameType.tintColor = [UIColor colorWithRed:122.0f/255.0f
+                                                           green:0.0f/255.0f
+                                                            blue:0.0f/255.0f
+                                                           alpha:1.0f];
+    
+    //Actualizamos el UI
+    [self updateUI];
+    
+}
+
 - (IBAction)touchCardButton:(UIButton *)sender {
+    
+    //Desactivamos el segmented control
+    self.segmentSwitchGameType.userInteractionEnabled = NO;
+    self.segmentSwitchGameType.tintColor = [UIColor grayColor];
     
     //Creamos una variable para obtener el indice del boton mediante el sender
     int chosenButtonIndex = (int)[self.cardButtons indexOfObject:sender];
@@ -64,7 +86,7 @@
         cardButton.enabled = !card.isMatched;
         
         //Actualizamos la puntuacion
-        self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", self.game.score];
+        self.scoreLabel.text = [NSString stringWithFormat:@"Score: %ld", (long)self.game.score];
         
     }
     

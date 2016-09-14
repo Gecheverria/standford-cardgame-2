@@ -415,15 +415,6 @@
                                     <rect key="frame" x="20" y="559" width="182" height="21"/>
                                 </variation>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8vJ-Bq-Ru3">
-                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                <state key="normal" title="New Game" backgroundImage="cardfront">
-                                    <color key="titleColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="267" y="550" width="105" height="30"/>
-                                </variation>
-                            </button>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="i9o-uk-ftH">
                                 <rect key="frame" x="-60" y="-14" width="121" height="29"/>
                                 <segments>
@@ -453,6 +444,18 @@
                                     <rect key="frame" x="20" y="472" width="234" height="21"/>
                                 </variation>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EzE-58-BBn">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <state key="normal" title="New Deck" backgroundImage="cardfront">
+                                    <color key="titleColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="275" y="559" width="97" height="30"/>
+                                </variation>
+                                <connections>
+                                    <action selector="generateNewDeckButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ynH-ez-IKI"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <variation key="default">
@@ -488,10 +491,10 @@
                                 <exclude reference="MKb-eH-WQ3"/>
                                 <exclude reference="gZQ-05-10s"/>
                                 <exclude reference="GAF-gk-h4t"/>
-                                <exclude reference="8vJ-Bq-Ru3"/>
                                 <exclude reference="i9o-uk-ftH"/>
                                 <exclude reference="FYs-Lh-xDv"/>
                                 <exclude reference="53T-C7-afa"/>
+                                <exclude reference="EzE-58-BBn"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -527,15 +530,16 @@
                                 <include reference="MKb-eH-WQ3"/>
                                 <include reference="gZQ-05-10s"/>
                                 <include reference="GAF-gk-h4t"/>
-                                <include reference="8vJ-Bq-Ru3"/>
                                 <include reference="i9o-uk-ftH"/>
                                 <include reference="FYs-Lh-xDv"/>
                                 <include reference="53T-C7-afa"/>
+                                <include reference="EzE-58-BBn"/>
                             </mask>
                         </variation>
                     </view>
                     <connections>
                         <outlet property="scoreLabel" destination="GAF-gk-h4t" id="ba6-KL-3mq"/>
+                        <outlet property="segmentSwitchGameType" destination="i9o-uk-ftH" id="R0s-hb-Frm"/>
                         <outletCollection property="cardButtons" destination="lIO-hY-mKL" id="Hnl-rL-RSv"/>
                         <outletCollection property="cardButtons" destination="veE-XS-Pi2" id="dZG-hS-Fwj"/>
                         <outletCollection property="cardButtons" destination="VgW-KP-9us" id="2AG-Lu-6cP"/>
