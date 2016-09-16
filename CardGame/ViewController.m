@@ -41,10 +41,7 @@
     
     //Habilitamos el segmented control
     self.segmentSwitchGameType.userInteractionEnabled = YES;
-    self.segmentSwitchGameType.tintColor = [UIColor colorWithRed:122.0f/255.0f
-                                                           green:0.0f/255.0f
-                                                            blue:0.0f/255.0f
-                                                           alpha:1.0f];
+    self.segmentSwitchGameType.tintColor = [UIColor colorWithRed:122.0f/255.0f green:0.0f/255.0f blue:0.0f/255.0f alpha:1.0f];
     
     //Actualizamos el UI
     [self updateUI];
@@ -93,15 +90,11 @@
         int cardButtonIndex = (int)[self.cardButtons indexOfObject:cardButton];
  
         CGameCard *card = [self.game cardAtIndex:cardButtonIndex];
-        
         [cardButton setTitle:[self setTitleForCard:card] forState:UIControlStateNormal];
-        
         [cardButton setBackgroundImage:[self setBackgroundImage:card] forState:UIControlStateNormal];
-        
         cardButton.enabled = !card.isMatched;
         
         self.scoreLabel.text = [NSString stringWithFormat:@"Score: %ld", (long)self.game.score];
-        
         self.gameStatus.text = [NSString stringWithFormat:@"%@", self.game.status];
         
     }
