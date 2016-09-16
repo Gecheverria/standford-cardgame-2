@@ -24,7 +24,7 @@
 @implementation ViewController
 
 - (CGameCardMatchingGame *)game {
-    if (!_game) _game = [[CGameCardMatchingGame alloc] initWithCardCount:[self.cardButtons count] usingDeck:[self createDeck]];
+    if (!_game) _game = [[CGameCardMatchingGame alloc] initWithCardCount:[self.cardButtons count] usingDeck:[self createDeck] gameType:self.segmentSwitchGameType.selectedSegmentIndex];
     
     return _game;
 }
@@ -37,8 +37,11 @@
 
 - (IBAction)generateNewDeckButton:(UIButton *)sender {
     
+    //Ponemos en nil el juego para que vuelva a ser inicializado
+    self.game = nil;
+    
     //creamos un nuevo deck
-    self.game = [[CGameCardMatchingGame alloc] initWithCardCount:[self.cardButtons count] usingDeck:[self createDeck]];
+    self.game = [[CGameCardMatchingGame alloc] initWithCardCount:[self.cardButtons count] usingDeck:[self createDeck] gameType:self.segmentSwitchGameType.selectedSegmentIndex];
     
     //Habilitamos el segmented control
     self.segmentSwitchGameType.userInteractionEnabled = YES;
@@ -46,6 +49,20 @@
                                                            green:0.0f/255.0f
                                                             blue:0.0f/255.0f
                                                            alpha:1.0f];
+    
+    switch (self.segmentSwitchGameType.selectedSegmentIndex) {
+        case 0:
+            
+            break;
+            
+        case 1:
+            
+            break;
+            
+        default:
+            self.gameStatus.text = @"I accidentally my whole model. Is it safe?";
+            break;
+    }
     
     //Actualizamos el UI
     [self updateUI];
@@ -58,35 +75,27 @@
     self.segmentSwitchGameType.userInteractionEnabled = NO;
     self.segmentSwitchGameType.tintColor = [UIColor grayColor];
     
-    //Creamos una variable para obtener el indice del boton mediante el sender
     int chosenButtonIndex = (int)[self.cardButtons indexOfObject:sender];
     
-    //A nuestro game de esta clase le pasamos el indice al metodo chooseCardAtIndex con la variable anterior
     [self.game chooseCardAtIndex:chosenButtonIndex];
-    //Debemos actualiar el UI con un metodo que creamos
+    
     [self updateUI];
 }
 
 -(void)updateUI {
     
-    //Actualizaremos la interfaz recorriendo todos los cardButtons y en base a nuestra CGameCard en nuestro modelo le pondremos el titulo y el fondo de imagen a cada carta
     for (UIButton *cardButton in self.cardButtons) {
-        
-        //Obtenemos el indice del boton actual
+
         int cardButtonIndex = (int)[self.cardButtons indexOfObject:cardButton];
-        
-        //Creamos una carta para obtener sus propiedades
+ 
         CGameCard *card = [self.game cardAtIndex:cardButtonIndex];
         
-        //Luego ponemos los datos del objeto a la carta
         [cardButton setTitle:[self setTitleForCard:card] forState:UIControlStateNormal];
         
         [cardButton setBackgroundImage:[self setBackgroundImage:card] forState:UIControlStateNormal];
         
-        //Si la carta encontro pareja, hay que deshabilitarla
         cardButton.enabled = !card.isMatched;
         
-        //Actualizamos la puntuacion
         self.scoreLabel.text = [NSString stringWithFormat:@"Score: %ld", (long)self.game.score];
         
         self.gameStatus.text = [NSString stringWithFormat:@"%@", self.game.status];

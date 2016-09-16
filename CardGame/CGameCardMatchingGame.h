@@ -13,12 +13,12 @@
 @interface CGameCardMatchingGame : NSObject
 
 //Initializer designado
-- (instancetype)initWithCardCount:(NSUInteger)count usingDeck:(CGameDeck *)deck;
+- (instancetype)initWithCardCount:(NSUInteger)count usingDeck:(CGameDeck *)deck gameType:(NSUInteger)type;
 
 - (void)chooseCardAtIndex:(NSUInteger)index;
 - (CGameCard *)cardAtIndex:(NSUInteger)index;
 
 @property (nonatomic, readonly) NSInteger score;
 @property (nonatomic, readonly) NSString *status;
-
+@property (nonatomic) NSUInteger matchType;
 @end
