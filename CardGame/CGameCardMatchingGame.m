@@ -111,7 +111,8 @@ static const int COST_TO_CHOOSE = 1;
                     
                 case 1:
                     
-                    self.status = [NSString stringWithFormat:@"%@ Selected", card.contents];
+                    self.status = [NSString stringWithFormat:@"Selected %@", card.contents];
+
                     
                     for (CGameCard *otherCard in self.cards) {
                         
@@ -124,18 +125,26 @@ static const int COST_TO_CHOOSE = 1;
                         
                         //Cuando se tengan 2 cartas adicionales seleccionadas para comparar, entramos al if
                         if ([currentSelectedCards count] == 2) {
+
+                            CGameCard *cardTwo = [currentSelectedCards objectAtIndex:0];
+                            CGameCard *cardThree = [currentSelectedCards objectAtIndex:1];
                             
                             int matchScore =[card match:currentSelectedCards];
                             
                             if (matchScore) {
                                 
-                                self.score = matchScore * MATCH_BONUS;
+                                int bonus = matchScore * MATCH_BONUS;
+                                self.score += bonus;
                                 
+                                //Seteamos las 2 cartas como matched
                                 for (CGameCard *otherCard in currentSelectedCards) {
                                     otherCard.matched = YES;
+                                    
                                 }
                                 
                                 card.matched = YES;
+                                self.status = [NSString stringWithFormat:@"Match found in %@ %@ %@ for %ld points!", card.contents, cardTwo.contents, cardThree.contents , (long)bonus];
+                                
                                 
                             } else {
                                 
@@ -143,7 +152,10 @@ static const int COST_TO_CHOOSE = 1;
                                 
                                 for (CGameCard *otherCard in currentSelectedCards) {
                                     otherCard.chosen = NO;
+                                    
                                 }
+                                
+                                self.status = [NSString stringWithFormat:@"%@ %@ and %@ doesn't match! %ld score penalty!", card.contents, cardTwo.contents, cardThree.contents, (long)MISS_PENALTY];
                                 
                             }
                             

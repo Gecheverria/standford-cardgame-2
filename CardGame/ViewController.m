@@ -29,7 +29,6 @@
     return _game;
 }
 
-
 - (CGameDeck *)createDeck {
     return [[CGamePlayingCardDeck alloc] init];
 }
