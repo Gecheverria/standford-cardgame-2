@@ -12,22 +12,30 @@
 
 //Para nuestro Matching game, hay que sobreescribir el metodo de CGameCard para comparar correctamente nuestras cartas
 - (int)match:(NSArray *)otherCards {
-    int score = 0;
-        
-        id card = [otherCards firstObject];
-        
-        if ([card isKindOfClass:[CGamePlayingCard class]]) {
-            
-            //Si es de tipo CGamePlayingCard, hacemos type casting al id card
-            CGamePlayingCard *otherCard = (CGamePlayingCard *)card;
-            
-            if (otherCard.rank == self.rank) {
-                score = 4;
-            } else if ([otherCard.suit isEqualToString:self.suit]) {
-                score = 1;
-            }
-        }
     
+    int score = 0;
+    
+    //Esta es para comparar la carta seleccionada con las otras 2
+    for (CGamePlayingCard *otherCard in otherCards) {
+        if (otherCard.rank == self.rank) {
+            score += 4;
+        } else if ([otherCard.suit isEqualToString:self.suit]) {
+            score += 1;
+        }
+    }
+
+    //Necesitamos comparar las 2 cartas que enviamos
+    if ([otherCards count] == 2) {
+        CGamePlayingCard *firstCard = [otherCards objectAtIndex:0];
+        CGamePlayingCard *secondCard = [otherCards objectAtIndex:1];
+        
+        if (firstCard.rank == secondCard.rank) {
+            score += 4;
+        } else if ([firstCard.suit isEqualToString:secondCard.suit]) {
+            score += 1;
+        }
+    }
+
     
     return score;
 }

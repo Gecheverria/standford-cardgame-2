@@ -425,20 +425,14 @@
                                 <variation key="widthClass=compact" fixedFrame="YES">
                                     <rect key="frame" x="259" y="506" width="121" height="29"/>
                                 </variation>
+                                <connections>
+                                    <action selector="gameMode:" destination="BYZ-38-t0r" eventType="valueChanged" id="mZ8-cZ-Ndx"/>
+                                </connections>
                             </segmentedControl>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game Mode" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FYs-Lh-xDv">
-                                <rect key="frame" x="-42" y="-21" width="42" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                                <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="267" y="472" width="113" height="21"/>
-                                </variation>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="53T-C7-afa">
                                 <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="widthClass=compact" fixedFrame="YES">
                                     <rect key="frame" x="20" y="472" width="234" height="79"/>
@@ -456,6 +450,15 @@
                                     <action selector="generateNewDeckButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ynH-ez-IKI"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game Mode" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FYs-Lh-xDv">
+                                <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="267" y="470" width="113" height="21"/>
+                                </variation>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <variation key="default">
@@ -492,9 +495,9 @@
                                 <exclude reference="gZQ-05-10s"/>
                                 <exclude reference="GAF-gk-h4t"/>
                                 <exclude reference="i9o-uk-ftH"/>
-                                <exclude reference="FYs-Lh-xDv"/>
                                 <exclude reference="53T-C7-afa"/>
                                 <exclude reference="EzE-58-BBn"/>
+                                <exclude reference="FYs-Lh-xDv"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -531,9 +534,9 @@
                                 <include reference="gZQ-05-10s"/>
                                 <include reference="GAF-gk-h4t"/>
                                 <include reference="i9o-uk-ftH"/>
-                                <include reference="FYs-Lh-xDv"/>
                                 <include reference="53T-C7-afa"/>
                                 <include reference="EzE-58-BBn"/>
+                                <include reference="FYs-Lh-xDv"/>
                             </mask>
                         </variation>
                     </view>

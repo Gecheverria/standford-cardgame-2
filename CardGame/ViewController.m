@@ -37,11 +37,8 @@
 
 - (IBAction)generateNewDeckButton:(UIButton *)sender {
     
-    //Ponemos en nil el juego para que vuelva a ser inicializado
+    //Ponemos en nil el juego para que vuelva a ser inicializado por el lazy instantiation
     self.game = nil;
-    
-    //creamos un nuevo deck
-    self.game = [[CGameCardMatchingGame alloc] initWithCardCount:[self.cardButtons count] usingDeck:[self createDeck] gameType:self.segmentSwitchGameType.selectedSegmentIndex];
     
     //Habilitamos el segmented control
     self.segmentSwitchGameType.userInteractionEnabled = YES;
@@ -50,24 +47,32 @@
                                                             blue:0.0f/255.0f
                                                            alpha:1.0f];
     
-    switch (self.segmentSwitchGameType.selectedSegmentIndex) {
-        case 0:
-            
-            break;
-            
-        case 1:
-            
-            break;
-            
-        default:
-            self.gameStatus.text = @"I accidentally my whole model. Is it safe?";
-            break;
-    }
-    
     //Actualizamos el UI
     [self updateUI];
     
 }
+
+- (IBAction)gameMode:(UISegmentedControl *)sender {
+    
+    //Para que cuando seleccionemos el modo no haya que volver a darlenew deck
+    switch (self.segmentSwitchGameType.selectedSegmentIndex) {
+        case 0:
+            self.game = nil;
+            [self updateUI];
+            break;
+            
+        case 1:
+            self.game = nil;
+            [self updateUI];
+            break;
+            
+        default:
+            NSLog(@"Do you even switch?");
+            break;
+    }
+    
+}
+
 
 - (IBAction)touchCardButton:(UIButton *)sender {
     

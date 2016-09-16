@@ -73,9 +73,9 @@ static const int COST_TO_CHOOSE = 1;
             NSMutableArray *currentSelectedCards = [[NSMutableArray alloc] init];
             
             switch ((unsigned long)self.matchType) {
-                //2 cards
+                //2 cartas, codigo ya existente.
                 case 0:
-                    self.status = [NSString stringWithFormat:@"%@", card.contents];
+                    self.status = [NSString stringWithFormat:@"%@ Selected", card.contents];
                     
                     for (CGameCard *otherCard in self.cards) {
                         
@@ -111,16 +111,18 @@ static const int COST_TO_CHOOSE = 1;
                     
                 case 1:
                     
-                    self.status = [NSString stringWithFormat:@"%@", card.contents];
+                    self.status = [NSString stringWithFormat:@"%@ Selected", card.contents];
                     
                     for (CGameCard *otherCard in self.cards) {
                         
+                        //Llenamos nuestro arreglo de cartas seleccionadas
                         if (otherCard.isChosen && !otherCard.isMatched) {
                             
                             [currentSelectedCards addObject:otherCard];
                             
                         }
                         
+                        //Cuando se tengan 2 cartas adicionales seleccionadas para comparar, entramos al if
                         if ([currentSelectedCards count] == 2) {
                             
                             int matchScore =[card match:currentSelectedCards];
