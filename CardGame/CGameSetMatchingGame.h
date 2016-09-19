@@ -1,8 +1,8 @@
 //
-//  CGameCardMatchingGame.h
+//  CGameSetMatchingGame.h
 //  CardGame
 //
-//  Created by Gabriel Enrique Echeverria Mira on 9/12/16.
+//  Created by Gabriel Enrique Echeverria Mira on 9/19/16.
 //  Copyright © 2016 Gabriel Enrique Echeverria Mira. All rights reserved.
 //
 
@@ -10,9 +10,8 @@
 #import "CGameDeck.h"
 #import "CGameCard.h"
 
-@interface CGameCardMatchingGame : NSObject
+@interface CGameSetMatchingGame : NSObject
 
-///Initializer designado y sugerencia de ijc
 - (instancetype)initWithCardCount:(NSUInteger)count usingDeck:(CGameDeck *)deck;
 
 - (void)chooseCardAtIndex:(NSUInteger)index;
@@ -20,5 +19,5 @@
 
 @property (nonatomic, readonly) NSInteger score;
 @property (nonatomic, readonly) NSString *status;
-@property (nonatomic) NSUInteger matchType;
+
 @end

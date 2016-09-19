@@ -16,7 +16,6 @@
 @property (strong, nonatomic) CGameCardMatchingGame *game;//Modelo de juego
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
-@property (weak, nonatomic) IBOutlet UISegmentedControl *segmentSwitchGameType;
 @property (weak, nonatomic) IBOutlet UILabel *gameStatus;
 
 @end
@@ -24,7 +23,7 @@
 @implementation ViewController
 
 - (CGameCardMatchingGame *)game {
-    if (!_game) _game = [[CGameCardMatchingGame alloc] initWithCardCount:[self.cardButtons count] usingDeck:[self createDeck] gameType:self.segmentSwitchGameType.selectedSegmentIndex];
+    if (!_game) _game = [[CGameCardMatchingGame alloc] initWithCardCount:[self.cardButtons count] usingDeck:[self createDeck]];
     
     return _game;
 }
@@ -39,42 +38,13 @@
     //Ponemos en nil el juego para que vuelva a ser inicializado por el lazy instantiation
     self.game = nil;
     
-    //Habilitamos el segmented control
-    self.segmentSwitchGameType.userInteractionEnabled = YES;
-    self.segmentSwitchGameType.tintColor = [UIColor colorWithRed:122.0f/255.0f green:0.0f/255.0f blue:0.0f/255.0f alpha:1.0f];
-    
     //Actualizamos el UI
     [self updateUI];
     
 }
 
-- (IBAction)gameMode:(UISegmentedControl *)sender {
-    
-    //Para que cuando seleccionemos el modo no haya que volver a darlenew deck
-    switch (self.segmentSwitchGameType.selectedSegmentIndex) {
-        case 0:
-            self.game = nil;
-            [self updateUI];
-            break;
-            
-        case 1:
-            self.game = nil;
-            [self updateUI];
-            break;
-            
-        default:
-            NSLog(@"Do you even switch?");
-            break;
-    }
-    
-}
-
 
 - (IBAction)touchCardButton:(UIButton *)sender {
-    
-    //Desactivamos el segmented control
-    self.segmentSwitchGameType.userInteractionEnabled = NO;
-    self.segmentSwitchGameType.tintColor = [UIColor grayColor];
     
     int chosenButtonIndex = (int)[self.cardButtons indexOfObject:sender];
     

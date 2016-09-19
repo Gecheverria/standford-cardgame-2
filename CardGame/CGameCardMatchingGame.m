@@ -23,14 +23,14 @@
     return _cards;
 }
 
-- (instancetype)initWithCardCount:(NSUInteger)count usingDeck :(CGameDeck *)deck gameType:(NSUInteger)type {
+- (instancetype)initWithCardCount:(NSUInteger)count usingDeck :(CGameDeck *)deck {
     
     self = [super init];
     
     if (self) {
         
         //Definimos que valor tendra matchType para ver como se jugara
-        self.matchType = type;
+        self.matchType = 0;
         
         //Para que no salga (nil) en el satus label cuando creamos un nuevo deck
         self.status = @"";
@@ -172,9 +172,7 @@ static const int COST_TO_CHOOSE = 1;
                     break;
             }
         }
-        
     }
-    
 }
 
 @end
