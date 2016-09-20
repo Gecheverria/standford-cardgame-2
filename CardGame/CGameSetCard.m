@@ -10,6 +10,7 @@
 
 @implementation CGameSetCard
 
+//Class methods
 + (NSArray *)symbolStrings {
     return @[@"●",@"◼︎",@"▲"];
 }
@@ -23,11 +24,29 @@
 }
 
 + (NSArray *)shading {
-    return @[@"solid", @"outline", @"fill"];
+    return @[@"solid", @"outline", @"alpha"];
 }
 
+//Set Card Properties getters
 - (NSString *)contents {
     return [NSString stringWithFormat:@"%@ %@ %lu %@", self.symbol, self.color, (unsigned long)self.number, self.shading];
 }
+
+- (NSString *)simbolo {
+    return [NSString stringWithFormat:@"%@", self.symbol];
+}
+
+- (NSString *)colour {
+    return [NSString stringWithFormat:@"%@", self.color];
+}
+
+- (NSUInteger)numero {
+    return self.number;
+}
+
+- (NSString *)style {
+    return [NSString stringWithFormat:@"%@", self.shading];
+}
+
 
 @end

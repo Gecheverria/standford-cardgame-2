@@ -34,11 +34,9 @@
 
 
 - (IBAction)generateNewDeckButton:(UIButton *)sender {
-    
-    //Ponemos en nil el juego para que vuelva a ser inicializado por el lazy instantiation
+
     self.game = nil;
     
-    //Actualizamos el UI
     [self updateUI];
     
 }

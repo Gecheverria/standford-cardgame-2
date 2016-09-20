@@ -9,6 +9,7 @@
 #import "CGameSetGameViewController.h"
 #import "CGameSetMatchingGame.h"
 #import "CGameSetCardDeck.h"
+#import "CGameSetCard.h"
 
 @interface CGameSetGameViewController ()
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *setCardButtons;
@@ -57,9 +58,12 @@
         
         int cardButtonIndex = (int)[self.setCardButtons indexOfObject:cardButton];
         
-        CGameCard *card = [self.game cardAtIndex:cardButtonIndex];
+        //Casting used to access CGameSetCard contents, otherwise, dissection of method "contents" would need to be done
+        CGameSetCard *card = (CGameSetCard *)[self.game cardAtIndex:cardButtonIndex];
         
-        [cardButton setTitle:[card contents] forState:UIControlStateNormal];
+        NSMutableAttributedString *cardContent = [self contentFormatting:card];
+        
+        [cardButton setAttributedTitle:cardContent forState:UIControlStateNormal];
         [cardButton setBackgroundImage:[self setBackgroundImage:card] forState:UIControlStateNormal];
         
         cardButton.enabled = !card.isMatched;
@@ -71,8 +75,43 @@
     
 }
 
+- (NSMutableAttributedString *)contentFormatting:(CGameSetCard *)card {
+    
+    NSString *body = [[NSString alloc] init];
+    
+    for (int i = 0; i < card.number; i++) {
+        body = [NSString stringWithFormat:@"%@ %@", body, card.symbol];
+    }
+    
+    UIColor *colorToUse = [UIColor blackColor];
+    if ([card.color isEqualToString:@"red"]) colorToUse = [UIColor redColor];
+    if ([card.color isEqualToString:@"green"]) colorToUse = [UIColor greenColor];
+    if ([card.color isEqualToString:@"blue"]) colorToUse = [UIColor blueColor];
+    
+    double alpha = 0.5;
+    if ([card.shading isEqualToString:@"solid"]) alpha = 1.0;
+    if ([card.shading isEqualToString:@"outline"]) alpha = 0.0;
+    if ([card.shading isEqualToString:@"alpha"]) alpha = 0.3;
+    
+    NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:body];
+    
+    NSDictionary *attr = @{
+                           NSForegroundColorAttributeName : [colorToUse colorWithAlphaComponent:alpha],
+                           NSStrokeWidthAttributeName : @-5,
+                           NSStrokeColorAttributeName : colorToUse
+                           };
+    
+    NSRange range = NSMakeRange(0, attrStr.length);
+    
+    [attrStr setAttributes:attr range:range];
+    
+    return attrStr;
+    
+}
+
 - (UIImage *)setBackgroundImage:(CGameCard *)card {
     return [UIImage imageNamed:card.isChosen ? @"selCardFront" : @"cardfront"];
 }
+
 
 @end

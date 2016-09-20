@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CGameSetCard.h"
 
 @interface CGameSetGameViewController : UIViewController
+
+- (NSMutableAttributedString *)contentFormatting:(CGameSetCard *)card;
 
 @end
