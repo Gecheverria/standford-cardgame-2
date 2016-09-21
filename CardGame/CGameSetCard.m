@@ -19,42 +19,18 @@
         CGameSetCard *sc = [otherCards objectAtIndex:0];
         CGameSetCard *tc = [otherCards objectAtIndex:1];
         
-        if (
-            ([self.symbol isEqualToString:sc.symbol] && [self.symbol isEqualToString:tc.symbol] && [sc.symbol isEqualToString:tc.symbol])
-            ||
-            (![self.symbol isEqualToString:sc.symbol] && ![self.symbol isEqualToString:tc.symbol] && ![sc.symbol isEqualToString:tc.symbol])
-            ) {
-            
-            NSLog(@"They all have the same symbol, or they have three different symbols.");
+        //Use NSSet because a Set is composed of unique objects, hence no duplicates, so we can apply the set logic more easily instead of a huge if.
+        NSSet *symbol = [[NSSet alloc] initWithArray:@[self.symbol, sc.symbol, tc.symbol]];
+        NSSet *colors = [[NSSet alloc] initWithArray:@[self.color, sc.color, tc.color]];
+        NSSet *shadings = [[NSSet alloc] initWithArray:@[self.shading, sc.shading, tc.shading]];
+        NSSet *numbers = [[NSSet alloc] initWithArray:@[[NSNumber numberWithInt: (int)self.number], [NSNumber numberWithInt: (int)sc.number], [NSNumber numberWithInt: (int)tc.number]]];
+        
+        //More easy to check if it doesn't comply, since it only takes 1 condition (2 of the same are found), instead of checking both 1 and 3
+        if (([symbol count] == 2) || ([colors count] == 2) || ([shadings count] == 2) || ([numbers count] == 2)) {
+            score = 0;
+        } else {
             score = 1;
-            
-        } else
-            
-        if (
-            ([self.color isEqualToString:sc.color] && [self.color isEqualToString:tc.color] && [sc.color isEqualToString:tc.color])
-            ||
-            (![self.color isEqualToString:sc.color] && ![self.color isEqualToString:tc.color] && ![sc.color isEqualToString:tc.color])
-            ) {
-            NSLog(@"They all have the same color, or they have three different colors.");
-            score = 1;
-        } else
-            
-        if (
-            (self.number == sc.number && self.number == tc.number && sc.number == tc.number)
-            ||
-            (self.number != sc.number && self.number != tc.number && sc.number != tc.number)
-            ) {
-            NSLog(@"They all have the same number, or they have three different numbers.");
-            score = 1;
-        } else
-            
-        if (
-            ([self.shading isEqualToString:sc.shading] && [self.shading isEqualToString:tc.shading] && [sc.shading isEqualToString:tc.shading])
-            ||
-            (![self.shading isEqualToString:sc.shading] && ![self.shading isEqualToString:tc.shading] && ![sc.shading isEqualToString:tc.shading])
-            ) {
-            NSLog(@"They all have the same shading, or they have three different shadings.");
-            score = 1;
+            NSLog(@"%d", score);
         }
         
     }
