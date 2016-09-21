@@ -18,6 +18,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 @property (weak, nonatomic) IBOutlet UILabel *gameStatus;
 
+@property (strong, nonatomic) NSMutableArray *history;
+
 @end
 
 @implementation ViewController
@@ -28,8 +30,9 @@
     return _game;
 }
 
+//Abstract method
 - (CGameDeck *)createDeck {
-    return [[CGamePlayingCardDeck alloc] init];
+    return nil;
 }
 
 
@@ -64,6 +67,7 @@
         
         self.scoreLabel.text = [NSString stringWithFormat:@"Score: %ld", (long)self.game.score];
         self.gameStatus.text = [NSString stringWithFormat:@"%@", self.game.status];
+        [self.history addObject:self.game.status];
         
     }
     

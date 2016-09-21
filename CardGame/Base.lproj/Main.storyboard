@@ -5,10 +5,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Match 2-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="CGamePlayingCardGameViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -513,10 +513,10 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" id="iB5-Ti-WVJ">
+                    <navigationItem key="navigationItem" title="Match 2" id="iB5-Ti-WVJ">
                         <barButtonItem key="rightBarButtonItem" title="History" id="M4h-Ag-I0x">
                             <connections>
-                                <segue destination="8ho-FN-y7E" kind="show" id="m0L-mE-sbQ"/>
+                                <segue destination="8ho-FN-y7E" kind="show" identifier="ShowHistory" id="m0L-mE-sbQ"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -559,24 +559,51 @@
             </objects>
             <point key="canvasLocation" x="2080.5" y="-39"/>
         </scene>
-        <!--View Controller-->
+        <!--Game History View Controller-->
         <scene sceneID="S5z-UW-7p3">
             <objects>
-                <viewController id="8ho-FN-y7E" sceneMemberID="viewController">
+                <viewController id="8ho-FN-y7E" customClass="CGameHistoryViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="fFk-sP-R2i"/>
                         <viewControllerLayoutGuide type="bottom" id="MFY-h1-mFZ"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="6AD-Ll-Mhn">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="1gh-6K-bSg">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="20" y="72" width="360" height="471"/>
+                                </variation>
+                            </textView>
+                        </subviews>
                         <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="1gh-6K-bSg"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="1gh-6K-bSg"/>
+                            </mask>
+                        </variation>
                     </view>
+                    <connections>
+                        <outlet property="textViewHistory" destination="1gh-6K-bSg" id="Vqk-GA-gzd"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C8l-ug-Qfs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2881.5" y="305"/>
         </scene>
-        <!--Game Set Game View Controller-->
+        <!--Set-->
         <scene sceneID="OL0-6l-mFB">
             <objects>
                 <viewController id="fCk-DQ-YUz" customClass="CGameSetGameViewController" sceneMemberID="viewController">
@@ -585,6 +612,7 @@
                         <viewControllerLayoutGuide type="bottom" id="LY1-Vp-GmL"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="NJA-7k-EM4">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="20c-hD-uws">
@@ -946,10 +974,10 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" id="701-AR-6ng">
+                    <navigationItem key="navigationItem" title="Set" id="701-AR-6ng">
                         <barButtonItem key="rightBarButtonItem" title="History" id="qL0-k4-hGG">
                             <connections>
-                                <segue destination="8ho-FN-y7E" kind="show" id="jDC-td-kRm"/>
+                                <segue destination="8ho-FN-y7E" kind="show" identifier="ShowHistory" id="jDC-td-kRm"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -1048,6 +1076,6 @@
         <image name="cardfront" width="64" height="96"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="m0L-mE-sbQ"/>
+        <segue reference="jDC-td-kRm"/>
     </inferredMetricsTieBreakers>
 </document>

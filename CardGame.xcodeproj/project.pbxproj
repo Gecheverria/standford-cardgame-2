@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C01BCE881D932A8F00B69FF4 /* CGamePlayingCardGameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C01BCE871D932A8F00B69FF4 /* CGamePlayingCardGameViewController.m */; };
+		C01BCE8B1D932B7C00B69FF4 /* CGameHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C01BCE8A1D932B7C00B69FF4 /* CGameHistoryViewController.m */; };
 		C0C2D10A1D8384FF00224BEB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C0C2D1091D8384FF00224BEB /* main.m */; };
 		C0C2D10D1D8384FF00224BEB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C0C2D10C1D8384FF00224BEB /* AppDelegate.m */; };
 		C0C2D1101D8384FF00224BEB /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0C2D10F1D8384FF00224BEB /* ViewController.m */; };
@@ -44,6 +46,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C01BCE861D932A8F00B69FF4 /* CGamePlayingCardGameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGamePlayingCardGameViewController.h; sourceTree = "<group>"; };
+		C01BCE871D932A8F00B69FF4 /* CGamePlayingCardGameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGamePlayingCardGameViewController.m; sourceTree = "<group>"; };
+		C01BCE891D932B7C00B69FF4 /* CGameHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGameHistoryViewController.h; sourceTree = "<group>"; };
+		C01BCE8A1D932B7C00B69FF4 /* CGameHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGameHistoryViewController.m; sourceTree = "<group>"; };
 		C0C2D1051D8384FF00224BEB /* CardGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CardGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0C2D1091D8384FF00224BEB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C0C2D10B1D8384FF00224BEB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -105,6 +111,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C01BCE851D9327D700B69FF4 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				C0FBCCD71D907A90007F0981 /* CGameSetGameViewController.h */,
+				C0FBCCD81D907A90007F0981 /* CGameSetGameViewController.m */,
+				C0C2D10E1D8384FF00224BEB /* ViewController.h */,
+				C0C2D10F1D8384FF00224BEB /* ViewController.m */,
+				C01BCE861D932A8F00B69FF4 /* CGamePlayingCardGameViewController.h */,
+				C01BCE871D932A8F00B69FF4 /* CGamePlayingCardGameViewController.m */,
+				C01BCE891D932B7C00B69FF4 /* CGameHistoryViewController.h */,
+				C01BCE8A1D932B7C00B69FF4 /* CGameHistoryViewController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
 		C0C2D0FC1D8384FF00224BEB = {
 			isa = PBXGroup;
 			children = (
@@ -128,17 +149,14 @@
 		C0C2D1071D8384FF00224BEB /* CardGame */ = {
 			isa = PBXGroup;
 			children = (
+				C01BCE851D9327D700B69FF4 /* Controllers */,
 				C0C2D15A1D87644C00224BEB /* Model */,
 				C0C2D10B1D8384FF00224BEB /* AppDelegate.h */,
 				C0C2D10C1D8384FF00224BEB /* AppDelegate.m */,
-				C0C2D10E1D8384FF00224BEB /* ViewController.h */,
-				C0C2D10F1D8384FF00224BEB /* ViewController.m */,
 				C0C2D1111D8384FF00224BEB /* Main.storyboard */,
 				C0C2D1141D8384FF00224BEB /* Assets.xcassets */,
 				C0C2D1161D8384FF00224BEB /* LaunchScreen.storyboard */,
 				C0C2D1191D8384FF00224BEB /* Info.plist */,
-				C0FBCCD71D907A90007F0981 /* CGameSetGameViewController.h */,
-				C0FBCCD81D907A90007F0981 /* CGameSetGameViewController.m */,
 				C0C2D1081D8384FF00224BEB /* Supporting Files */,
 			);
 			path = CardGame;
@@ -325,9 +343,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				C0C2D1591D871D9900224BEB /* CGamePlayingCardDeck.m in Sources */,
+				C01BCE881D932A8F00B69FF4 /* CGamePlayingCardGameViewController.m in Sources */,
 				C0C2D1101D8384FF00224BEB /* ViewController.m in Sources */,
 				C0FBCCD01D90510C007F0981 /* CGameSetCard.m in Sources */,
 				C0C2D10D1D8384FF00224BEB /* AppDelegate.m in Sources */,
+				C01BCE8B1D932B7C00B69FF4 /* CGameHistoryViewController.m in Sources */,
 				C0C2D1561D8712BD00224BEB /* CGamePlayingCard.m in Sources */,
 				C0C2D10A1D8384FF00224BEB /* main.m in Sources */,
 				C0C2D14F1D87087700224BEB /* CGameCard.m in Sources */,
