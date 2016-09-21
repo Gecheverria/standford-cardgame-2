@@ -10,4 +10,6 @@
 
 @interface CGameHistoryViewController : UIViewController
 
+@property (strong, nonatomic) NSArray *history;
+
 @end

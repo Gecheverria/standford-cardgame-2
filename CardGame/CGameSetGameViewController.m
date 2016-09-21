@@ -10,6 +10,7 @@
 #import "CGameSetMatchingGame.h"
 #import "CGameSetCardDeck.h"
 #import "CGameSetCard.h"
+#import "CGameHistoryViewController.h"
 
 @interface CGameSetGameViewController ()
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
@@ -23,6 +24,19 @@
 @end
 
 @implementation CGameSetGameViewController
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    if ([segue.identifier isEqualToString:@"ShowHistory"]) {
+        if ([segue.destinationViewController isKindOfClass:[CGameHistoryViewController class]]) {
+            
+            CGameHistoryViewController *hvc = (CGameHistoryViewController *)segue.destinationViewController;
+            hvc.history = @[@"Hello", @"From", @"Set!"];
+            
+        }
+    }
+    
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -62,8 +76,7 @@
     for (UIButton *cardButton in self.cardButtons) {
         
         int cardButtonIndex = (int)[self.cardButtons indexOfObject:cardButton];
-        
-        //Casting used to access CGameSetCard contents, otherwise, dissection of method "contents" would need to be done
+
         CGameSetCard *card = [self.game cardAtIndex:cardButtonIndex];
         
         NSMutableAttributedString *cardContent = [self contentFormatting:card];
@@ -74,6 +87,7 @@
         cardButton.enabled = !card.isMatched;
         
         self.score.text = [NSString stringWithFormat:@"Matches: %ld", (long)self.game.score];
+        
         
         
     }

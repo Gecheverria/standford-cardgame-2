@@ -12,8 +12,6 @@
 
 @property (weak, nonatomic) IBOutlet UITextView *textViewHistory;
 
-@property (strong, nonatomic) NSArray *history;
-
 @end
 
 @implementation CGameHistoryViewController

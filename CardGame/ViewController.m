@@ -43,7 +43,7 @@
         if ([segue.destinationViewController isKindOfClass:[CGameHistoryViewController class]]) {
             
             CGameHistoryViewController *hvc = (CGameHistoryViewController *)segue.destinationViewController;
-            
+            hvc.history = self.history;
             
         }
     }
@@ -88,9 +88,11 @@
         self.scoreLabel.text = [NSString stringWithFormat:@"Score: %ld", (long)self.game.score];
         self.gameStatus.text = [NSString stringWithFormat:@"%@", self.game.status];
         
-        [self.history addObject:self.game.status];
+        
         
     }
+    
+    [self.history addObject:self.game.status];
     
 }
 
