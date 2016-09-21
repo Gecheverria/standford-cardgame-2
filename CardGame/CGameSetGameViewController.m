@@ -24,6 +24,11 @@
 
 @implementation CGameSetGameViewController
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self updateUI];
+}
+
 - (CGameSetMatchingGame *)game {
     if (!_game) _game = [[CGameSetMatchingGame alloc] initWithCardCount:[self.setCardButtons count] usingDeck:[self createDeck]];
     return _game;
@@ -59,7 +64,7 @@
         int cardButtonIndex = (int)[self.setCardButtons indexOfObject:cardButton];
         
         //Casting used to access CGameSetCard contents, otherwise, dissection of method "contents" would need to be done
-        CGameSetCard *card = (CGameSetCard *)[self.game cardAtIndex:cardButtonIndex];
+        CGameSetCard *card = [self.game cardAtIndex:cardButtonIndex];
         
         NSMutableAttributedString *cardContent = [self contentFormatting:card];
         

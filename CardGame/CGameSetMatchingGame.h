@@ -8,14 +8,14 @@
 
 #import <Foundation/Foundation.h>
 #import "CGameDeck.h"
-#import "CGameCard.h"
+#import "CGameSetCard.h"
 
 @interface CGameSetMatchingGame : NSObject
 
 - (instancetype)initWithCardCount:(NSUInteger)count usingDeck:(CGameDeck *)deck;
 
 - (void)chooseCardAtIndex:(NSUInteger)index;
-- (CGameCard *)cardAtIndex:(NSUInteger)index;
+- (CGameSetCard *)cardAtIndex:(NSUInteger)index;
 
 @property (nonatomic, readonly) NSInteger score;
 @property (nonatomic, readonly) NSString *status;

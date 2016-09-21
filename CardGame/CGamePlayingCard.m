@@ -10,12 +10,10 @@
 
 @implementation CGamePlayingCard
 
-//Para nuestro Matching game, hay que sobreescribir el metodo de CGameCard para comparar correctamente nuestras cartas
 - (int)match:(NSArray *)otherCards {
     
     int score = 0;
     
-    //Esta es para comparar la carta seleccionada con las otras 2
     for (CGamePlayingCard *otherCard in otherCards) {
         if (otherCard.rank == self.rank) {
             score += 4;
@@ -24,7 +22,6 @@
         }
     }
 
-    //Necesitamos comparar las 2 cartas que enviamos
     if ([otherCards count] == 2) {
         CGamePlayingCard *firstCard = [otherCards objectAtIndex:0];
         CGamePlayingCard *secondCard = [otherCards objectAtIndex:1];
@@ -40,16 +37,14 @@
     return score;
 }
 
-//Sobreescribimos la propiedad contents de CGameCard
 -(NSString *) contents {
     
     NSArray *rankStrings = [CGamePlayingCard rankStrings];
-    //los self.ranky self.suit vienen de sus getters, que son llenados en el playingcarddeck.
+    //los self.rank y self.suit vienen de sus getters, que son llenados en el playingcarddeck.
     return [rankStrings[self.rank] stringByAppendingString:self.suit];
     
 }
 
-//A continuacion 3 metodos de clase, que son principalmente de utilidad para definir valores
 + (NSArray *)validSuits {
     return @[@"♠︎",@"♣︎",@"♥︎",@"♦︎"];
 }
@@ -62,7 +57,6 @@
     return [[self rankStrings] count] - 1;
 }
 
-//Debemos sintetizar suit porque sobreescribimos su getter y setter
 @synthesize suit = _suit;
 
 - (void)setSuit:(NSString *)suit {

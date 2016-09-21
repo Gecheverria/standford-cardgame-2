@@ -12,7 +12,7 @@
 
 @property (nonatomic, readwrite) NSInteger score;
 @property (nonatomic, readwrite) NSString *status;
-@property (strong, nonatomic) NSMutableArray *cards; //De objeto CGameCard
+@property (strong, nonatomic) NSMutableArray *cards; //of CGameCard
 
 @end
 
@@ -29,10 +29,8 @@
     
     if (self) {
         
-        //Definimos que valor tendra matchType para ver como se jugara
         self.matchType = 0;
         
-        //Para que no salga (nil) en el satus label cuando creamos un nuevo deck
         self.status = @"";
 
         
