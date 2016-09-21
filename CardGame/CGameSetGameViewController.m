@@ -12,7 +12,7 @@
 #import "CGameSetCard.h"
 
 @interface CGameSetGameViewController ()
-@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *setCardButtons;
+@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
 
 @property (strong, nonatomic) CGameSetMatchingGame *game; //Model
 
@@ -30,7 +30,7 @@
 }
 
 - (CGameSetMatchingGame *)game {
-    if (!_game) _game = [[CGameSetMatchingGame alloc] initWithCardCount:[self.setCardButtons count] usingDeck:[self createDeck]];
+    if (!_game) _game = [[CGameSetMatchingGame alloc] initWithCardCount:[self.cardButtons count] usingDeck:[self createDeck]];
     return _game;
 }
 
@@ -40,7 +40,7 @@
 
 - (IBAction)touchCardButton:(UIButton *)sender {
     
-    int chosenButtonIndex = (int)[self.setCardButtons indexOfObject:sender];
+    int chosenButtonIndex = (int)[self.cardButtons indexOfObject:sender];
     
     [self.game chooseCardAtIndex:chosenButtonIndex];
     
@@ -59,9 +59,9 @@
 
 - (void)updateUI {
     
-    for (UIButton *cardButton in self.setCardButtons) {
+    for (UIButton *cardButton in self.cardButtons) {
         
-        int cardButtonIndex = (int)[self.setCardButtons indexOfObject:cardButton];
+        int cardButtonIndex = (int)[self.cardButtons indexOfObject:cardButton];
         
         //Casting used to access CGameSetCard contents, otherwise, dissection of method "contents" would need to be done
         CGameSetCard *card = [self.game cardAtIndex:cardButtonIndex];

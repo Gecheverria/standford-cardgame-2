@@ -34,6 +34,10 @@
 
 - (void)updateUI {
     
+    NSString *stuff = [self.history componentsJoinedByString:@"\n"];
+    
+    self.textViewHistory.text = stuff;
+    
 }
 
 @end

@@ -7,9 +7,9 @@
 //
 
 #import "ViewController.h"
-#import "CGamePlayingCardDeck.h"
 #import "CGameCard.h"
 #import "CGameCardMatchingGame.h"
+#import "CGameHistoryViewController.h"
 
 @interface ViewController ()
 
@@ -28,6 +28,26 @@
     if (!_game) _game = [[CGameCardMatchingGame alloc] initWithCardCount:[self.cardButtons count] usingDeck:[self createDeck]];
     
     return _game;
+}
+
+- (NSMutableArray *)history {
+    
+    if (!_history) _history = [[NSMutableArray alloc] init];
+    
+    return _history;
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    if ([segue.identifier isEqualToString:@"ShowHistory"]) {
+        if ([segue.destinationViewController isKindOfClass:[CGameHistoryViewController class]]) {
+            
+            CGameHistoryViewController *hvc = (CGameHistoryViewController *)segue.destinationViewController;
+            
+            
+        }
+    }
+    
 }
 
 //Abstract method
@@ -67,6 +87,7 @@
         
         self.scoreLabel.text = [NSString stringWithFormat:@"Score: %ld", (long)self.game.score];
         self.gameStatus.text = [NSString stringWithFormat:@"%@", self.game.status];
+        
         [self.history addObject:self.game.status];
         
     }
