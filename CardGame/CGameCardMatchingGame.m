@@ -67,108 +67,39 @@ static const int COST_TO_CHOOSE = 1;
         if (card.isChosen) {
             card.chosen = NO;
         } else {
-            //Para guardar nuestras cartas seleccionadas para el match 3
-            NSMutableArray *currentSelectedCards = [[NSMutableArray alloc] init];
+
+            self.status = [NSString stringWithFormat:@"%@ Selected", card.contents];
             
-            switch ((unsigned long)self.matchType) {
-                //2 cartas, codigo ya existente.
-                case 0:
-                    self.status = [NSString stringWithFormat:@"%@ Selected", card.contents];
+            for (CGameCard *otherCard in self.cards) {
+                
+                if (otherCard.isChosen && !otherCard.isMatched) {
                     
-                    for (CGameCard *otherCard in self.cards) {
+                    int matchScore = [card match:@[otherCard]];
+                    
+                    if (matchScore) {
+                        int bonus = matchScore * MATCH_BONUS;
+                        self.score += bonus;
                         
-                        if (otherCard.isChosen && !otherCard.isMatched) {
-                            
-                            int matchScore = [card match:@[otherCard]];
-                            
-                            if (matchScore) {
-                                int bonus = matchScore * MATCH_BONUS;
-                                self.score += bonus;
-                                
-                                card.matched = YES;
-                                otherCard.matched = YES;
-                                
-                                self.status = [NSString stringWithFormat:@"Matched %@ %@ for %ld points!", card.contents, otherCard.contents, (long)bonus];
-                                
-                            } else {
-                                self.score -= MISS_PENALTY;
-                                
-                                self.status = [NSString stringWithFormat:@"%@ %@ don't match! %ld score penalty!", card.contents, otherCard.contents, (long)MISS_PENALTY];
-                                
-                                otherCard.chosen = NO;
-                            }
-                            break;
-                            
-                        }
+                        card.matched = YES;
+                        otherCard.matched = YES;
+                        
+                        self.status = [NSString stringWithFormat:@"Matched %@ %@ for %ld points!", card.contents, otherCard.contents, (long)bonus];
+                        
+                    } else {
+                        self.score -= MISS_PENALTY;
+                        
+                        self.status = [NSString stringWithFormat:@"%@ %@ don't match! %ld score penalty!", card.contents, otherCard.contents, (long)MISS_PENALTY];
+                        
+                        otherCard.chosen = NO;
                     }
-                    
-                    self.score -= COST_TO_CHOOSE;
-                    card.chosen = YES;
-                    
                     break;
                     
-                case 1:
-                    
-                    self.status = [NSString stringWithFormat:@"Selected %@", card.contents];
-
-                    
-                    for (CGameCard *otherCard in self.cards) {
-                        
-                        //Llenamos nuestro arreglo de cartas seleccionadas
-                        if (otherCard.isChosen && !otherCard.isMatched) {
-                            
-                            [currentSelectedCards addObject:otherCard];
-                            
-                        }
-                        
-                        //Cuando se tengan 2 cartas adicionales seleccionadas para comparar, entramos al if
-                        if ([currentSelectedCards count] == 2) {
-
-                            CGameCard *cardTwo = [currentSelectedCards objectAtIndex:0];
-                            CGameCard *cardThree = [currentSelectedCards objectAtIndex:1];
-                            
-                            int matchScore =[card match:currentSelectedCards];
-                            
-                            if (matchScore) {
-                                
-                                int bonus = matchScore * MATCH_BONUS;
-                                self.score += bonus;
-                                
-                                //Seteamos las 2 cartas como matched
-                                for (CGameCard *otherCard in currentSelectedCards) {
-                                    otherCard.matched = YES;
-                                    
-                                }
-                                
-                                card.matched = YES;
-                                self.status = [NSString stringWithFormat:@"Match found in %@ %@ %@ for %ld points!", card.contents, cardTwo.contents, cardThree.contents , (long)bonus];
-                                
-                                
-                            } else {
-                                
-                                self.score -= MISS_PENALTY;
-                                
-                                for (CGameCard *otherCard in currentSelectedCards) {
-                                    otherCard.chosen = NO;
-                                    
-                                }
-                                
-                                self.status = [NSString stringWithFormat:@"%@ %@ and %@ doesn't match! %ld score penalty!", card.contents, cardTwo.contents, cardThree.contents, (long)MISS_PENALTY];
-                                
-                            }
-                            
-                        }
-                    }
-                    
-                    self.score -= COST_TO_CHOOSE;
-                    card.chosen = YES;
-                    
-                    break;
-                    
-                default:
-                    NSLog(@"How did you get here?");
-                    break;
+                }
             }
+            
+            self.score -= COST_TO_CHOOSE;
+            card.chosen = YES;
+            
         }
     }
 }

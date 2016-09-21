@@ -96,6 +96,7 @@ static const int SET_SCORE = 1;
                         self.status = [NSString stringWithFormat:@"NO MATCH 4 U!"];
                         
                     }
+                    break;
                     
                 }
             }

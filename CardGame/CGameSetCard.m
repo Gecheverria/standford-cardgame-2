@@ -30,7 +30,6 @@
             score = 0;
         } else {
             score = 1;
-            NSLog(@"%d", score);
         }
         
     }
