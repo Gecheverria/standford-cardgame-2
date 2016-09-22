@@ -25,7 +25,7 @@
         NSSet *shadings = [[NSSet alloc] initWithArray:@[self.shading, sc.shading, tc.shading]];
         NSSet *numbers = [[NSSet alloc] initWithArray:@[[NSNumber numberWithInt: (int)self.number], [NSNumber numberWithInt: (int)sc.number], [NSNumber numberWithInt: (int)tc.number]]];
         
-        //More easy to check if it doesn't comply, since it only takes 1 condition (2 of the same are found), instead of checking both 1 and 3
+        //More easy to check if it doesn't comply, since it only takes 1 condition for it to not be a set, instead of checking both 1 and 3.
         if (([symbol count] == 2) || ([colors count] == 2) || ([shadings count] == 2) || ([numbers count] == 2)) {
             score = 0;
         } else {

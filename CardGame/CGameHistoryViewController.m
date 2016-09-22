@@ -32,9 +32,12 @@
 
 - (void)updateUI {
     
-    NSString *stuff = [self.history componentsJoinedByString:@"\n"];
-    
-    self.textViewHistory.text = stuff;
+    NSMutableAttributedString *attrstr = [[NSMutableAttributedString alloc] init];
+    for (NSAttributedString *status in self.history) {
+        [attrstr appendAttributedString:status];
+        [attrstr appendAttributedString:[[NSAttributedString alloc] initWithString:@"\n"]];
+    }
+    self.textViewHistory.attributedText = attrstr;
     
 }
 

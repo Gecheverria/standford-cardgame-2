@@ -92,7 +92,9 @@
         
     }
     
-    [self.history addObject:self.game.status];
+    NSMutableAttributedString *log = [[NSMutableAttributedString alloc] initWithString:self.game.status];
+    
+    [self.history addObject:log];
     
 }
 

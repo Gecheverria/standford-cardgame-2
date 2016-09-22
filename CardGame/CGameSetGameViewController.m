@@ -16,6 +16,7 @@
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
 
 @property (strong, nonatomic) CGameSetMatchingGame *game; //Model
+@property (strong, nonatomic) NSMutableArray *history;
 
 @property (weak, nonatomic) IBOutlet UILabel *status;
 @property (weak, nonatomic) IBOutlet UILabel *score;
@@ -31,11 +32,16 @@
         if ([segue.destinationViewController isKindOfClass:[CGameHistoryViewController class]]) {
             
             CGameHistoryViewController *hvc = (CGameHistoryViewController *)segue.destinationViewController;
-            hvc.history = @[@"Hello", @"From", @"Set!"];
+            hvc.history = self.history;
             
         }
     }
     
+}
+
+- (NSMutableArray *)history {
+    if (!_history) _history = [[NSMutableArray alloc] init];
+    return _history;
 }
 
 - (void)viewDidLoad {
@@ -67,6 +73,8 @@
     
     self.game = nil;
     
+    self.status.text = @"";
+    
     [self updateUI];
     
 }
@@ -86,8 +94,19 @@
         
         cardButton.enabled = !card.isMatched;
         
+        if ([card.contents isEqualToString:self.game.status]) {
+            NSMutableAttributedString *label = [self contentFormatting:card];
+            
+            NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:@"Selected "];
+            [attrStr appendAttributedString:label];
+
+            
+            self.status.attributedText = attrStr;
+            
+            [self.history addObject:attrStr];
+        }
+
         self.score.text = [NSString stringWithFormat:@"Matches: %ld", (long)self.game.score];
-        
         
         
     }
