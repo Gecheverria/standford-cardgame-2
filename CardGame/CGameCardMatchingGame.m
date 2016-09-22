@@ -28,11 +28,9 @@
     self = [super init];
     
     if (self) {
-        
         self.matchType = 0;
         
         self.status = @"";
-
         
         for (int i = 0; i < count; i++) {
 
@@ -43,7 +41,6 @@
             } else {
                 self = nil;
             }
-            
         }
     }
     
@@ -67,7 +64,6 @@ static const int COST_TO_CHOOSE = 1;
         if (card.isChosen) {
             card.chosen = NO;
         } else {
-
             self.status = [NSString stringWithFormat:@"%@ Selected", card.contents];
             
             for (CGameCard *otherCard in self.cards) {

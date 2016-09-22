@@ -29,13 +29,12 @@
                         setCard.shading = shading;
                         
                         [self addCard:setCard];
-                        
                     }
                 }
             }
         }
-        
     }
+    
     return self;
 }
 

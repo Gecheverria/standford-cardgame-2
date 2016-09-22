@@ -15,7 +15,6 @@
     int score = 0;
     
     if ([otherCards count] == 2) {
-        
         CGameSetCard *sc = [otherCards objectAtIndex:0];
         CGameSetCard *tc = [otherCards objectAtIndex:1];
         
@@ -31,7 +30,6 @@
         } else {
             score = 1;
         }
-        
     }
     
     return score;
@@ -74,6 +72,5 @@
 - (NSString *)style {
     return [NSString stringWithFormat:@"%@", self.shading];
 }
-
 
 @end

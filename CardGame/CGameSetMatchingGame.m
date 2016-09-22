@@ -28,7 +28,6 @@
     self = [super init];
     
     if (self) {
-        
         self.status = @"";
         
         for (int i = 0; i < count; i++) {
@@ -69,15 +68,11 @@ static const int SET_SCORE = 1;
                 
                 if (otherCard.isChosen && !otherCard.isMatched) {
                     [selectedCards addObject:otherCard];
-                    
                 }
                 
                 if ([selectedCards count] == 2) {
                     
                     int matchScore = [card match:selectedCards];
-                    
-                    CGameSetCard *sc = [selectedCards objectAtIndex:0];
-                    CGameSetCard *tc = [selectedCards objectAtIndex:1];
                     
                     if (matchScore) {
                         
@@ -92,24 +87,20 @@ static const int SET_SCORE = 1;
                         self.status = [NSString stringWithFormat:@"Match found!"];
                         
                     } else {
-                        
                         for (CGameSetCard *otherCard in selectedCards) {
                             otherCard.chosen = NO;
                         }
                         
                         self.status = [NSString stringWithFormat:@"The selected cards are not a set!"];
-                        
                     }
-                    break;
                     
+                    break;
                 }
             }
             
             card.chosen = YES;
-            
         }
     }
-    
 }
 
 @end

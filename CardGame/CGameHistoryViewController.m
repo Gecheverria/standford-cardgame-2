@@ -20,14 +20,12 @@
     
     _history = history;
     if (self.view.window)[self updateUI];
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];
     [self updateUI];
-    
 }
 
 - (void)updateUI {
@@ -37,8 +35,8 @@
         [attrstr appendAttributedString:status];
         [attrstr appendAttributedString:[[NSAttributedString alloc] initWithString:@"\n"]];
     }
-    self.textViewHistory.attributedText = attrstr;
     
+    self.textViewHistory.attributedText = attrstr;
 }
 
 @end

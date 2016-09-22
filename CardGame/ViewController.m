@@ -31,23 +31,18 @@
 }
 
 - (NSMutableArray *)history {
-    
     if (!_history) _history = [[NSMutableArray alloc] init];
     
     return _history;
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    
     if ([segue.identifier isEqualToString:@"ShowHistory"]) {
         if ([segue.destinationViewController isKindOfClass:[CGameHistoryViewController class]]) {
-            
             CGameHistoryViewController *hvc = (CGameHistoryViewController *)segue.destinationViewController;
             hvc.history = self.history;
-            
         }
     }
-    
 }
 
 //Abstract method

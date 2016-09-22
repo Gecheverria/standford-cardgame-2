@@ -13,40 +13,22 @@
 #import "CGameHistoryViewController.h"
 
 @interface CGameSetGameViewController ()
-@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
 
+@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
 @property (strong, nonatomic) CGameSetMatchingGame *game; //Model
 @property (strong, nonatomic) NSMutableArray *history;
-
 @property (weak, nonatomic) IBOutlet UILabel *status;
 @property (weak, nonatomic) IBOutlet UILabel *score;
-
 
 @end
 
 @implementation CGameSetGameViewController
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    
-    if ([segue.identifier isEqualToString:@"ShowHistory"]) {
-        if ([segue.destinationViewController isKindOfClass:[CGameHistoryViewController class]]) {
-            
-            CGameHistoryViewController *hvc = (CGameHistoryViewController *)segue.destinationViewController;
-            hvc.history = self.history;
-            
-        }
-    }
-    
-}
+#pragma mark - Lazy instantiation
 
 - (NSMutableArray *)history {
     if (!_history) _history = [[NSMutableArray alloc] init];
     return _history;
-}
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    [self updateUI];
 }
 
 - (CGameSetMatchingGame *)game {
@@ -58,40 +40,38 @@
     return [[CGameSetCardDeck alloc] init];
 }
 
-- (IBAction)touchCardButton:(UIButton *)sender {
-    
-    int chosenButtonIndex = (int)[self.cardButtons indexOfObject:sender];
-    
-    [self.game chooseCardAtIndex:chosenButtonIndex];
-    
+#pragma mark - View stuff
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
     [self updateUI];
-    
 }
 
-
 - (IBAction)newDeck:(UIButton *)sender {
-    
     self.game = nil;
-    
     self.status.text = @"";
-    
     [self updateUI];
-    
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"ShowHistory"]) {
+        if ([segue.destinationViewController isKindOfClass:[CGameHistoryViewController class]]) {
+            
+            CGameHistoryViewController *hvc = (CGameHistoryViewController *)segue.destinationViewController;
+            hvc.history = self.history;
+        }
+    }
 }
 
 - (void)updateUI {
-    
     for (UIButton *cardButton in self.cardButtons) {
         
         int cardButtonIndex = (int)[self.cardButtons indexOfObject:cardButton];
-
         CGameSetCard *card = [self.game cardAtIndex:cardButtonIndex];
         
         NSMutableAttributedString *cardContent = [self contentFormatting:card];
-        
         [cardButton setAttributedTitle:cardContent forState:UIControlStateNormal];
         [cardButton setBackgroundImage:[self setBackgroundImage:card] forState:UIControlStateNormal];
-        
         cardButton.enabled = !card.isMatched;
         
         if ([card.contents isEqualToString:self.game.status]) {
@@ -107,11 +87,10 @@
         }
 
         self.score.text = [NSString stringWithFormat:@"Matches: %ld", (long)self.game.score];
-        
-        
     }
-    
 }
+
+#pragma mark - Styles Method
 
 - (NSMutableAttributedString *)contentFormatting:(CGameSetCard *)card {
     
@@ -132,19 +111,15 @@
     if ([card.shading isEqualToString:@"alpha"]) alpha = 0.3;
     
     NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:body];
-    
     NSDictionary *attr = @{
                            NSForegroundColorAttributeName : [colorToUse colorWithAlphaComponent:alpha],
                            NSStrokeWidthAttributeName : @-5,
                            NSStrokeColorAttributeName : colorToUse
                            };
-    
     NSRange range = NSMakeRange(0, attrStr.length);
-    
     [attrStr setAttributes:attr range:range];
     
     return attrStr;
-    
 }
 
 - (UIImage *)setBackgroundImage:(CGameCard *)card {

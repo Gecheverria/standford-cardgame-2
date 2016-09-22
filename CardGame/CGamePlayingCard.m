@@ -33,16 +33,12 @@
         }
     }
 
-    
     return score;
 }
 
 -(NSString *) contents {
-    
     NSArray *rankStrings = [CGamePlayingCard rankStrings];
-    //los self.rank y self.suit vienen de sus getters, que son llenados en el playingcarddeck.
     return [rankStrings[self.rank] stringByAppendingString:self.suit];
-    
 }
 
 + (NSArray *)validSuits {
