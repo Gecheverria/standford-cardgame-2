@@ -25,7 +25,6 @@
     }
     
     return score;
-    
 }
 
 @end

@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CGameDeck.h"
 
 @interface ViewController : UIViewController
 
+-(CGameDeck *)createDeck; //Abstract
 
 @end
 

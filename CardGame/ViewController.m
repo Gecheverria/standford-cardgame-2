@@ -7,15 +7,18 @@
 //
 
 #import "ViewController.h"
-#import "CGamePlayingCardDeck.h"
 #import "CGameCard.h"
 #import "CGameCardMatchingGame.h"
+#import "CGameHistoryViewController.h"
 
 @interface ViewController ()
 
 @property (strong, nonatomic) CGameCardMatchingGame *game;//Modelo de juego
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
+@property (weak, nonatomic) IBOutlet UILabel *gameStatus;
+
+@property (strong, nonatomic) NSMutableArray *history;
 
 @end
 
@@ -27,46 +30,66 @@
     return _game;
 }
 
+- (NSMutableArray *)history {
+    if (!_history) _history = [[NSMutableArray alloc] init];
+    
+    return _history;
+}
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"ShowHistory"]) {
+        if ([segue.destinationViewController isKindOfClass:[CGameHistoryViewController class]]) {
+            CGameHistoryViewController *hvc = (CGameHistoryViewController *)segue.destinationViewController;
+            hvc.history = self.history;
+        }
+    }
+}
+
+//Abstract method
 - (CGameDeck *)createDeck {
-    return [[CGamePlayingCardDeck alloc] init];
+    return nil;
+}
+
+
+- (IBAction)generateNewDeckButton:(UIButton *)sender {
+
+    self.game = nil;
+    
+    [self updateUI];
+    
 }
 
 
 - (IBAction)touchCardButton:(UIButton *)sender {
     
-    //Creamos una variable para obtener el indice del boton mediante el sender
     int chosenButtonIndex = (int)[self.cardButtons indexOfObject:sender];
     
-    //A nuestro game de esta clase le pasamos el indice al metodo chooseCardAtIndex con la variable anterior
     [self.game chooseCardAtIndex:chosenButtonIndex];
-    //Debemos actualiar el UI con un metodo que creamos
+    
     [self updateUI];
 }
 
 -(void)updateUI {
     
-    //Actualizaremos la interfaz recorriendo todos los cardButtons y en base a nuestra CGameCard en nuestro modelo le pondremos el titulo y el fondo de imagen a cada carta
     for (UIButton *cardButton in self.cardButtons) {
-        
-        //Obtenemos el indice del boton actual
+
         int cardButtonIndex = (int)[self.cardButtons indexOfObject:cardButton];
-        
-        //Creamos una carta para obtener sus propiedades
+ 
         CGameCard *card = [self.game cardAtIndex:cardButtonIndex];
-        
-        //Luego ponemos los datos del objeto a la carta
         [cardButton setTitle:[self setTitleForCard:card] forState:UIControlStateNormal];
-        
         [cardButton setBackgroundImage:[self setBackgroundImage:card] forState:UIControlStateNormal];
-        
-        //Si la carta encontro pareja, hay que deshabilitarla
         cardButton.enabled = !card.isMatched;
         
-        //Actualizamos la puntuacion
-        self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", self.game.score];
+        self.scoreLabel.text = [NSString stringWithFormat:@"Score: %ld", (long)self.game.score];
+        self.gameStatus.text = [NSString stringWithFormat:@"%@", self.game.status];
+        
+        
         
     }
+    
+    NSMutableAttributedString *log = [[NSMutableAttributedString alloc] initWithString:self.game.status];
+    
+    [self.history addObject:log];
     
 }
 

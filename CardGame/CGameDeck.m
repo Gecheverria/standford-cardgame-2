@@ -30,7 +30,6 @@
     } else {
         [self.cards addObject:card];
     }
-    
 }
 
 - (void)addCard:(CGameCard *)card {
@@ -47,11 +46,9 @@
         randomCard = self.cards[index];
         
         [self.cards removeObjectAtIndex:index];
-        
     }
     
     return randomCard;
-    
 }
 
 @end
